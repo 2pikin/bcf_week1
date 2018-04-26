@@ -56,14 +56,13 @@ io.on('connection', (socket) => {
       hash: messageHash,
       sign: signObj.signature,
       pubkey: s.pubKey,
-      s_hash: messageHash.toString('hex'),
       s_sign: signObj.signature.toString('hex'),
       s_pubkey: s.pubKey.toString('hex'),
     });
   });
 
   s.on('verify_message', (data) => {
-    const result = secp256k1.verify(data.hash, data.sign, data.pubkey);
+    const result = secp256k1.verify(Buffer.from(data.cl_hash, 'hex'), data.cl_sign, data.cl_pubkey);
     io.sockets.emit('verify_message', { result });
   });
 
