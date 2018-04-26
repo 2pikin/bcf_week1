@@ -53,7 +53,6 @@ io.on('connection', (socket) => {
     io.sockets.emit('new_message', {
       message: data.message,
       username: s.username,
-      hash: messageHash,
       sign: signObj.signature,
       pubkey: s.pubKey,
       s_sign: signObj.signature.toString('hex'),
